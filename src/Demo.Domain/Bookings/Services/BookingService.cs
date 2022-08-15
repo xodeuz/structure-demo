@@ -1,4 +1,4 @@
-﻿using Demo.Domain.BookableResource.Interfaces;
+﻿using Demo.Domain.BookableResources.Interfaces;
 using Demo.Domain.Bookings.DTO;
 using Demo.Domain.Bookings.Entities;
 using Demo.Domain.Bookings.Extensions;
@@ -34,21 +34,22 @@ internal class BookingService : IBookingService
         booking.SetResource(resource);
 
         // Convert model to data transfer object
-        var dto = booking.ToDto();
-        await _repository.AddAsync(dto, ct);
+        await _repository.AddAsync(booking, ct);
         await _repository.UnitOfWork.SaveChangesAsync(ct);
         return booking.Id;
     }
 
     /// <inheritdoc/>
-    public Task<IEnumerable<BookingDto>> GetAllBookingsAsync(CancellationToken ct)
+    public async Task<IEnumerable<BookingDto>> GetAllBookingsAsync(CancellationToken ct)
     {
-        return _repository.GetAllAsync(ct);
+        var entities = await _repository.GetAllAsync(ct);
+        return entities.Select(x => x.ToDto());
     }
 
     /// <inheritdoc/>
-    public Task<BookingDto> GetBookingByIdAsync(Guid id, CancellationToken ct)
+    public async Task<BookingDto> GetBookingByIdAsync(Guid id, CancellationToken ct)
     {
-        return _repository.GetBookingByIdAsync(id, ct);
+        var entity = await _repository.GetBookingByIdAsync(id, ct);
+        return entity.ToDto();
     }
 }

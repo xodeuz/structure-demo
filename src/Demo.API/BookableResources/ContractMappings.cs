@@ -1,7 +1,7 @@
-﻿using Demo.API.BookableResource.Contracts;
-using Demo.Domain.BookableResource.DTO;
+﻿using Demo.API.BookableResources.Contracts;
+using Demo.Domain.BookableResources.DTO;
 
-namespace Demo.API.BookableResource;
+namespace Demo.API.BookableResources;
 
 /// <summary>
 ///     Mapping between application contract to internal data transfer objects

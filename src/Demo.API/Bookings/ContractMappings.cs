@@ -1,7 +1,7 @@
-﻿using Demo.API.Booking.Contracts;
+﻿using Demo.API.Bookings.Contracts;
 using Demo.Domain.Bookings.DTO;
 
-namespace Demo.API.Booking
+namespace Demo.API.Bookings
 {
     /// <summary>
     ///     Mapping between application contract to internal data transfer objects

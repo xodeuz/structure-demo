@@ -2,7 +2,7 @@
 
 namespace Demo.Domain.Bookings.Extensions;
 
-internal static class BookingExtensions
+internal static class BookableResourceExtensions
 {
     public static BookingDto ToDto(this Entities.Booking model)
         => new()

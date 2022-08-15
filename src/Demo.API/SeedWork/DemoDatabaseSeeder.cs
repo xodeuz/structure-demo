@@ -1,6 +1,6 @@
 ﻿using Bogus;
-using Demo.Domain.BookableResource.DTO;
-using Demo.Domain.BookableResource.Interfaces;
+using Demo.Domain.BookableResources.Entities;
+using Demo.Domain.BookableResources.Interfaces;
 
 namespace Demo.API.SeedWork;
 
@@ -18,7 +18,7 @@ internal static class DemoDatabaseSeeder
         var logger = loggerFactory.CreateLogger(nameof(DemoDatabaseSeeder));
         logger.LogInformation("Starting to seed database");
 
-        var faker = new Faker<BookableResourceDto>(locale: "sv")
+        var faker = new Faker<BookableResource>(locale: "sv")
             .UseSeed(1337)
             .RuleFor(prop => prop.Name, f => f.Address.StreetAddress())
             .RuleFor(prop => prop.IsClosed, f => f.Random.Bool())

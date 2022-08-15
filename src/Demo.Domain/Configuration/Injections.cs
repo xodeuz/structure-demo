@@ -1,5 +1,5 @@
-﻿using Demo.Domain.BookableResource.Interfaces;
-using Demo.Domain.BookableResource.Services;
+﻿using Demo.Domain.BookableResources.Interfaces;
+using Demo.Domain.BookableResources.Services;
 using Demo.Domain.Bookings.Interfaces;
 using Demo.Domain.Bookings.Services;
 using Microsoft.Extensions.DependencyInjection;

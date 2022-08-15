@@ -1,8 +1,8 @@
-﻿using Demo.API.BookableResource.Contracts;
-using Demo.Domain.BookableResource.Interfaces;
+﻿using Demo.API.BookableResources.Contracts;
+using Demo.Domain.BookableResources.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Demo.API.BookableResource;
+namespace Demo.API.BookableResources;
 
 [Route("api/[controller]")]
 [ApiController]

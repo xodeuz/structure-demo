@@ -1,7 +1,7 @@
-﻿using Demo.Domain.BookableResource.Interfaces;
+﻿using Demo.Domain.BookableResources.Interfaces;
 using Demo.Domain.Bookings.Interfaces;
-using Demo.Infrastructure.Persistence.BookableResource;
-using Demo.Infrastructure.Persistence.Booking;
+using Demo.Infrastructure.Persistence.BookableResources;
+using Demo.Infrastructure.Persistence.Bookings;
 using Demo.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

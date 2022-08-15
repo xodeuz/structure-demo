@@ -1,11 +1,11 @@
-﻿using Demo.Domain.BookableResource.DTO;
-using Demo.Domain.BookableResource.Exceptions;
-using Demo.Domain.BookableResource.Interfaces;
+﻿using Demo.Domain.BookableResources.Entities;
+using Demo.Domain.BookableResources.Exceptions;
+using Demo.Domain.BookableResources.Interfaces;
 using Demo.Domain.Shared;
 using Demo.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Demo.Infrastructure.Persistence.BookableResource;
+namespace Demo.Infrastructure.Persistence.BookableResources;
 
 internal class BookableResourceRepository : IBookableResourceRepository
 {
@@ -17,7 +17,7 @@ internal class BookableResourceRepository : IBookableResourceRepository
         _context = context;
     }
 
-    public async Task<BookableResourceDto> GetResourceByIdAsync(Guid resourceId, CancellationToken ct = default)
+    public async Task<BookableResource> GetResourceByIdAsync(Guid resourceId, CancellationToken ct = default)
     {
         var entity = await _context.Resources.FindAsync(new object?[] { resourceId }, cancellationToken: ct);
 
@@ -26,18 +26,16 @@ internal class BookableResourceRepository : IBookableResourceRepository
             throw new BookableResourceNotFoundException();
         }
 
-        return entity.ToDto();
+        return entity;
     }
 
-    public async Task<IEnumerable<BookableResourceDto>> GetAllAsync(CancellationToken ct = default)
+    public async Task<IEnumerable<BookableResource>> GetAllAsync(CancellationToken ct = default)
     {
-        var entities = await _context.Resources.AsNoTracking().ToListAsync(ct);
-        return entities.ToDtoCollection();
+        return await _context.Resources.AsNoTracking().ToListAsync(ct);
     }
 
-    public async Task AddAsync(BookableResourceDto dto, CancellationToken ct = default)
+    public async Task AddAsync(BookableResource entity, CancellationToken ct = default)
     {
-        var entity = dto.ToEntity();
         await _context.Resources.AddAsync(entity, ct);
     }
 }

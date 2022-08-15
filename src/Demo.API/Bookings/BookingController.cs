@@ -1,9 +1,9 @@
-﻿using Demo.API.Booking.Contracts;
+﻿using Demo.API.Bookings.Contracts;
 using Demo.Domain.Bookings.Exceptions;
 using Demo.Domain.Bookings.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Demo.API.Booking;
+namespace Demo.API.Bookings;
 
 [Route("api/[controller]")]
 [ApiController]

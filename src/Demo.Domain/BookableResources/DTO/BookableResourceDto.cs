@@ -1,9 +1,9 @@
-﻿namespace Demo.Domain.BookableResource.DTO
+﻿namespace Demo.Domain.BookableResources.DTO
 {
     /// <summary>
     ///     Data transfer object
     /// </summary>
-    public class BookableResourceDto
+    public record BookableResourceDto
     {
         public Guid Id { get; init; }
 

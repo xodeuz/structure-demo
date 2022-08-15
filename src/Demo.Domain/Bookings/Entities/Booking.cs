@@ -1,8 +1,8 @@
-﻿using Demo.Domain.BookableResource.DTO;
+﻿using Demo.Domain.BookableResources.Entities;
 
 namespace Demo.Domain.Bookings.Entities
 {
-    internal sealed class Booking
+    public sealed class Booking
     {
         public Booking(Guid id)
         {
@@ -27,7 +27,7 @@ namespace Demo.Domain.Bookings.Entities
             UserId = userId;
         }
 
-        internal void SetResource(BookableResourceDto resource)
+        internal void SetResource(BookableResource resource)
         {
             ArgumentNullException.ThrowIfNull(resource, nameof(resource));
 

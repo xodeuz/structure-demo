@@ -1,4 +1,4 @@
-﻿namespace Demo.API.BookableResource.Contracts
+﻿namespace Demo.API.BookableResources.Contracts
 {
     /// <summary>
     ///     Bookable Resource contract

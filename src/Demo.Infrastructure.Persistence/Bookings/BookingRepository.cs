@@ -1,12 +1,11 @@
-﻿using Demo.Domain.Bookings.DTO;
+﻿using Demo.Domain.Bookings.Entities;
 using Demo.Domain.Bookings.Exceptions;
 using Demo.Domain.Bookings.Interfaces;
 using Demo.Domain.Shared;
 using Demo.Infrastructure.Persistence.Context;
-using Demo.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Demo.Infrastructure.Persistence.Booking;
+namespace Demo.Infrastructure.Persistence.Bookings;
 
 internal class BookingRepository : IBookingRepository
 {
@@ -19,13 +18,12 @@ internal class BookingRepository : IBookingRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<BookingDto>> GetAllAsync(CancellationToken ct = default)
+    public async Task<IEnumerable<Booking>> GetAllAsync(CancellationToken ct = default)
     {
-        var results = await _context.Bookings.AsNoTracking().ToListAsync(ct);
-        return results.ToDtoCollection();
+        return await _context.Bookings.AsNoTracking().ToListAsync(ct);
     }
 
-    public async Task<BookingDto> GetBookingByIdAsync(Guid id, CancellationToken ct = default)
+    public async Task<Booking> GetBookingByIdAsync(Guid id, CancellationToken ct = default)
     {
         var entity = await _context.Bookings.FindAsync(new object?[] { id }, cancellationToken: ct);
 
@@ -34,16 +32,11 @@ internal class BookingRepository : IBookingRepository
             throw new BookingNotFoundException();
         }
 
-        return entity.ToDto();
+        return entity;
     }
 
-    public async Task AddAsync(BookingDto booking, CancellationToken ct = default)
+    public async Task AddAsync(Booking entity, CancellationToken ct = default)
     {
-        var entity = new BookingEntity
-        {
-            Id = booking.Id
-        };
-
         await _context.Bookings.AddAsync(entity, ct);
     }
 }

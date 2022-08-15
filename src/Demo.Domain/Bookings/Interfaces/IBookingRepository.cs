@@ -1,4 +1,4 @@
-﻿using Demo.Domain.Bookings.DTO;
+﻿using Demo.Domain.Bookings.Entities;
 using Demo.Domain.Shared;
 
 namespace Demo.Domain.Bookings.Interfaces;
@@ -11,7 +11,7 @@ public interface IBookingRepository
     /// <summary>
     ///     Get all bookings
     /// </summary>
-    Task<IEnumerable<BookingDto>> GetAllAsync(CancellationToken ct = default);
+    Task<IEnumerable<Booking>> GetAllAsync(CancellationToken ct = default);
 
     /// <summary>
     ///     Get booking by unique identifier
@@ -19,7 +19,7 @@ public interface IBookingRepository
     /// <param name="id">Unique ID</param>
     /// <param name="ct">CancellationToken</param>
     /// <returns>BookingDto</returns>
-    Task<BookingDto> GetBookingByIdAsync(Guid id, CancellationToken ct = default);
+    Task<Booking> GetBookingByIdAsync(Guid id, CancellationToken ct = default);
 
     /// <summary>
     ///     Add new booking entity
@@ -27,7 +27,7 @@ public interface IBookingRepository
     /// <remarks>
     ///     Repositories dont apply any changes until the unit of work has been commited.
     /// </remarks>
-    Task AddAsync(BookingDto booking, CancellationToken ct = default);
+    Task AddAsync(Booking booking, CancellationToken ct = default);
 
     /// <summary>
     ///     Current unit of work

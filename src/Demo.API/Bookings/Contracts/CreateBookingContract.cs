@@ -1,4 +1,4 @@
-﻿namespace Demo.API.Booking.Contracts
+﻿namespace Demo.API.Bookings.Contracts
 {
     public record CreateBookingContract
         (Guid UserId,

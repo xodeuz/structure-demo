@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Demo.Domain.BookableResource.Exceptions;
+namespace Demo.Domain.BookableResources.Exceptions;
 
 /// <summary>
 ///     Custom domain exception

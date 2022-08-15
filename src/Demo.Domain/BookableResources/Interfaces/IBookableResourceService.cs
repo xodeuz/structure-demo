@@ -1,6 +1,6 @@
-﻿using Demo.Domain.BookableResource.DTO;
+﻿using Demo.Domain.BookableResources.DTO;
 
-namespace Demo.Domain.BookableResource.Interfaces;
+namespace Demo.Domain.BookableResources.Interfaces;
 
 public interface IBookableResourceService
 {

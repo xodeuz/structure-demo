@@ -1,4 +1,4 @@
-﻿namespace Demo.API.Booking.Contracts
+﻿namespace Demo.API.Bookings.Contracts
 {
     /// <summary>
     ///     Contract used to expose the data from the API.
