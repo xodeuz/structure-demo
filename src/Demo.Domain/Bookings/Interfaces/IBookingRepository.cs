@@ -22,6 +22,11 @@ public interface IBookingRepository
     Task<Booking> GetBookingByIdAsync(Guid id, CancellationToken ct = default);
 
     /// <summary>
+    ///     Get bookings by date and resource id
+    /// </summary>
+    Task<IEnumerable<Booking>> GetBookingsAsync(DateTime date, Guid resourceId, CancellationToken ct = default);
+
+    /// <summary>
     ///     Add new booking entity
     /// </summary>
     /// <remarks>

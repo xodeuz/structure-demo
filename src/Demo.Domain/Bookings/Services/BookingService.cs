@@ -1,6 +1,7 @@
 ﻿using Demo.Domain.BookableResources.Interfaces;
 using Demo.Domain.Bookings.DTO;
 using Demo.Domain.Bookings.Entities;
+using Demo.Domain.Bookings.Exceptions;
 using Demo.Domain.Bookings.Extensions;
 using Demo.Domain.Bookings.Interfaces;
 
@@ -27,11 +28,18 @@ internal class BookingService : IBookingService
     {
         // Retrieve additional data
         var resource = await _resourceRepository.GetResourceByIdAsync(command.ResourceId, ct);
+        var bookings = await _repository.GetBookingsAsync(command.Date, command.ResourceId, ct);
+
+        if (bookings.Any())
+        {
+            throw new DateUnavailableException($"Bookable resource is not available on date: {command.Date.ToShortDateString()}");
+        }
 
         // Create a new booking using domain model
         var booking = Booking.New();
         booking.SetBookedBy(command.UserId);
         booking.SetResource(resource);
+        booking.SetDate(command.Date);
 
         // Convert model to data transfer object
         await _repository.AddAsync(booking, ct);
@@ -43,7 +51,7 @@ internal class BookingService : IBookingService
     public async Task<IEnumerable<BookingDto>> GetAllBookingsAsync(CancellationToken ct)
     {
         var entities = await _repository.GetAllAsync(ct);
-        return entities.Select(x => x.ToDto());
+        return entities.ToDtoCollection();
     }
 
     /// <inheritdoc/>

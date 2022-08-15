@@ -2,5 +2,6 @@
 {
     public record CreateBookingContract
         (Guid UserId,
-        Guid ResourceId);
+        Guid ResourceId,
+        DateTime Date);
 }

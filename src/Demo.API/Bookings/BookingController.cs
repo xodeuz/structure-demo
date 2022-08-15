@@ -34,8 +34,8 @@ public class BookingController : ControllerBase
     }
 
     /// <summary>
-    ///     Get all bookings.
-    ///     GET v1/Booking
+    ///     Get booking.
+    ///     GET v1/Booking/{:id}
     /// </summary>
     [HttpGet("{id}", Name = "GetBooking")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BookingContract))]
@@ -57,17 +57,31 @@ public class BookingController : ControllerBase
 
 
     /// <summary>
-    ///     Get all bookings.
-    ///     GET v1/Booking
+    ///     Create Booking.
+    ///     POST v1/Booking
     /// </summary>
     [HttpPost(Name = "CreateBooking")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(IEnumerable<BookingContract>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> CreateBooking(CreateBookingContract contract, CancellationToken ct)
     {
-        var command = contract.ToDto();
+        try
+        {
+            var command = contract.ToDto();
 
-        var id = await _domainService.CreateAsync(command, ct);
+            var id = await _domainService.CreateAsync(command, ct);
 
-        return Created(Url.RouteUrl(id)!, id);
+            return Created(Url.RouteUrl(id)!, id);
+        }
+        catch (BusinessRuleViolationException ex)
+        {
+            _logger.LogInformation("Rule Violation: {Message}", ex.Message);
+            return BadRequest(ex.Message);
+        }
+        catch (DateUnavailableException ex)
+        {
+            _logger.LogInformation("{Message}", ex.Message);
+            return BadRequest(ex.Message);
+        }
     }
 }

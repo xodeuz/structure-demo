@@ -12,13 +12,14 @@ namespace Demo.API.Bookings
             => dtoCollection.Select(dto => dto.ToContract()).ToList();
 
         public static BookingContract ToContract(this BookingDto dto)
-            => new(dto.Id);
+            => new(dto.Id, dto.UserId, dto.ResourceId, dto.Date);
 
         public static CreateBookingDto ToDto(this CreateBookingContract contract)
             => new()
             {
                 UserId = contract.UserId,
-                ResourceId = contract.ResourceId
+                ResourceId = contract.ResourceId,
+                Date = contract.Date,
             };
     }
 }

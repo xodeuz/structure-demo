@@ -39,4 +39,9 @@ internal class BookingRepository : IBookingRepository
     {
         await _context.Bookings.AddAsync(entity, ct);
     }
+
+    public async Task<IEnumerable<Booking>> GetBookingsAsync(DateTime date, Guid resourceId, CancellationToken ct = default)
+    {
+        return await _context.Bookings.Where(booking => booking.Date.ToShortDateString() == date.ToShortDateString() && booking.ResourceId == resourceId).AsNoTracking().ToListAsync(ct);
+    }
 }
